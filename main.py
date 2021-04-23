@@ -30,6 +30,19 @@ while True:
     query = input('Please Input Query: ')
     docis = search_engine.search(query)
 
-    docid = [doc[0] for doc in docis]
-    conts = origin_data.loc[origin_data['id'].isin(docid)]
-    print(conts)
+    result = []
+    max_num = 10
+    max_len = 100
+    for idx, doc in enumerate(docis):
+        if idx >= max_num:
+            break
+        docid = doc[0]
+        score = doc[1]
+        result.append({
+            'id': docid,
+            'sc': score,
+            'link': origin_data.at[docid, 'link'],
+            'cont': origin_data.at[docid, 'cont'][:max_len] + '...',
+            'title': origin_data.at[docid, 'title']
+        })
+    print(result)
