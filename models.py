@@ -101,11 +101,11 @@ class IndexModel():
     {
         word: {
             'df': document_frequency,
-            'ds': {
+            'ds': [{
                 'id': document_id,
                 'dl': document_length,
                 'tf': term_frequency
-            }
+            }, ...]
         },
         ...
     }
@@ -143,7 +143,6 @@ class IndexModel():
         TOTAL_DOC_LEN = 0
         for row in df.itertuples():
             doc_id = getattr(row, 'id')
-            link = getattr(row, 'link')
             cont = getattr(row, 'cont')
 
             TOTAL_DOC_NUM += 1
